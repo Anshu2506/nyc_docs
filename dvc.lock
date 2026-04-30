@@ -1,0 +1,19 @@
+schema: '2.0'
+stages:
+  make_dataset:
+    cmd: python ./src/data/make_dataset.py ./data/raw/Nyc_dataset.csv
+    deps:
+    - path: ./data/raw/Nyc_dataset.csv
+      hash: md5
+      md5: 7ccb0cf6e163af7b054e38613afb908e
+      size: 30003
+    - path: ./src/data/make_dataset.py
+      hash: md5
+      md5: b2c0f8e038c5c6b8810347662a1b4038
+      size: 1227
+    outs:
+    - path: ./data/processed
+      hash: md5
+      md5: 259689bc932269422a88fe5f2e9f2844.dir
+      size: 30021
+      nfiles: 2

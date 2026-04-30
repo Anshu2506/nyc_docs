@@ -1,30 +1,50 @@
-# -*- coding: utf-8 -*-
-import click
-import logging
-from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import os
+import pathlib
+import sys
+import yaml
 
 
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
-    """
-    logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
+#load data 
+def load_dataset(data_path):
+    df=pd.read_csv(data_path)
+    return df
+
+#split data
+def split_data(df,test_size,seed):
+    train,test=train_test_split(df,test_size=test_size,random_state=seed)
+    return train,test
+
+#save data
+def save_file(train,test,output_path):
+    os.makedirs(output_path,exist_ok=True)
+
+    train.to_csv(output_path +"/train.csv",index=False,header=True)
+    test.to_csv(output_path +"/test.csv",index=False,header=True)
+
+def main():
+    curr=pathlib.Path(__file__)    
+    homedir=curr.parent.parent.parent
+
+    #load input data
+    input_path=sys.argv[1]
+    input_data=homedir.as_posix() + input_path
+
+    #params file
+    params_path=homedir.as_posix()+"/params.yaml"
+    params_file=yaml.safe_load(open(params_path))['make_dataset']
+
+    #gives output path to save file
+    output_file=homedir.as_posix()+'/data/processed'
 
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
+    df=load_dataset(input_data)
+    train,test=split_data(df,params_file['test_size'],params_file['seed'])
+    save_file(train,test,output_file)
 
-    # not used in this stub but often useful for finding various files
-    project_dir = Path(__file__).resolve().parents[2]
 
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
-
+if __name__=="__main__":
     main()
+
+    
