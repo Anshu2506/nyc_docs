@@ -1,12 +1,12 @@
 schema: '2.0'
 stages:
   make_dataset:
-    cmd: python ./src/data/make_dataset.py ./data/raw/sample_submission.csv
+    cmd: python ./src/data/make_dataset.py ./data/raw/Nyc_taxi_fare.csv
     deps:
-    - path: ./data/raw/sample_submission.csv
+    - path: ./data/raw/Nyc_taxi_fare.csv
       hash: md5
-      md5: 40c599722aafb0a3f9f2eb36d15f4428
-      size: 8751893
+      md5: 0686e4fc98617485dba9fdbabbf1c48d
+      size: 70794289
     - path: ./src/data/make_dataset.py
       hash: md5
       md5: b2c0f8e038c5c6b8810347662a1b4038
@@ -14,6 +14,6 @@ stages:
     outs:
     - path: ./data/processed
       hash: md5
-      md5: 6d882a3e87ae7ba7d30910a7c086c4f8.dir
-      size: 9377046
+      md5: a6f37f0f46cacc8896693613cb09c871.dir
+      size: 69257315
       nfiles: 2
