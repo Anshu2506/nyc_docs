@@ -1,9 +1,9 @@
 stages:
   make_dataset:
-    cmd: python ./src/data/make_dataset.py ./data/raw/Nyc_dataset.csv
+    cmd: python ./src/data/make_dataset.py ./data/raw/sample_submission.csv
     deps:
     - ./src/data/make_dataset.py
-    - ./data/raw/Nyc_dataset.csv
+    - ./data/raw/sample_submission.csv
     outs:
     - ./data/processed
     
