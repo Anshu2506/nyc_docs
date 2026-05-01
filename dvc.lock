@@ -5,8 +5,8 @@ stages:
     deps:
     - path: ./data/raw/Nyc_taxi_fare.csv
       hash: md5
-      md5: 0686e4fc98617485dba9fdbabbf1c48d
-      size: 70794289
+      md5: 5040ae10c2884d02d2e6efb5e6ae5ba7
+      size: 270429245
     - path: ./src/data/make_dataset.py
       hash: md5
       md5: b2c0f8e038c5c6b8810347662a1b4038
@@ -14,6 +14,6 @@ stages:
     outs:
     - path: ./data/processed
       hash: md5
-      md5: a6f37f0f46cacc8896693613cb09c871.dir
-      size: 69257315
+      md5: 19b6cd452dab1e64ec2fcfa74ca7b5f3.dir
+      size: 270298975
       nfiles: 2
