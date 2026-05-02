@@ -75,10 +75,10 @@ def split_dataset(df,target,test_size,seed):
 def save_file(x_train,x_test,y_train,y_test,output_path):
     os.makedirs(output_path,exist_ok=True)
 
-    x_train.to_csv(output_path+"/x_train",index=False,header=True)
-    x_test.to_csv(output_path+"/x_test",index=False,header=True)
-    y_train.to_csv(output_path+"/y_train",index=False,header=True)
-    y_test.to_csv(output_path+"/y_test",index=False,header=True)
+    x_train.to_csv(output_path+"/x_train.csv",index=False,header=True)
+    x_test.to_csv(output_path+"/x_test.csv",index=False,header=True)
+    y_train.to_csv(output_path+"/y_train.csv",index=False,header=True)
+    y_test.to_csv(output_path+"/y_test.csv",index=False,header=True)
 
 
 
