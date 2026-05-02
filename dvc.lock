@@ -17,3 +17,20 @@ stages:
       md5: 19b6cd452dab1e64ec2fcfa74ca7b5f3.dir
       size: 270298975
       nfiles: 2
+  build_features:
+    cmd: python ./src/features/build_features.py ./data/raw/Nyc_taxi_fare.csv
+    deps:
+    - path: ./data/raw/Nyc_taxi_fare.csv
+      hash: md5
+      md5: 5040ae10c2884d02d2e6efb5e6ae5ba7
+      size: 270429245
+    - path: ./src/features/build_features.py
+      hash: md5
+      md5: 48b614d699ff2a95725cdadc35df8fdb
+      size: 3595
+    outs:
+    - path: ./data/external
+      hash: md5
+      md5: d6cb564e5094e23e5f8e11cebf8bcf99.dir
+      size: 518629481
+      nfiles: 4

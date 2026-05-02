@@ -7,3 +7,12 @@ stages:
     outs:
     - ./data/processed
     
+
+  build_features:
+    cmd: python ./src/features/build_features.py ./data/raw/Nyc_taxi_fare.csv
+    deps:
+    - ./src/features/build_features.py
+    - ./data/raw/Nyc_taxi_fare.csv
+
+    outs:
+    - ./data/external
