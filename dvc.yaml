@@ -48,3 +48,12 @@ stages:
 
     outs:
     - ./reports/metrics.json
+
+  predict_model:
+    cmd: python ./src/models/predict_model.py ./data/external/x_test.csv ./models_matrix/best_model.pkl
+    deps:
+    - ./src/models/predict_model.py 
+    - ./data/external/x_test.csv
+    - ./models_matrix/best_model.pkl
+    outs:
+    - ./predictions/predictions.csv

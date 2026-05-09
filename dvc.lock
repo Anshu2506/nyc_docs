@@ -112,3 +112,24 @@ stages:
       hash: md5
       md5: 70a2af490393d62685df07255762ba93
       size: 106
+  predict_model:
+    cmd: python ./src/models/predict_model.py ./data/external/x_test.csv 
+      ./models_matrix/best_model.pkl
+    deps:
+    - path: ./data/external/x_test.csv
+      hash: md5
+      md5: 07af2935f01ed3765158ca6afaa49f0a
+      size: 60481116
+    - path: ./models_matrix/best_model.pkl
+      hash: md5
+      md5: 8c4cd76da10e9b6f4bb05ba609ac231c
+      size: 4455665
+    - path: ./src/models/predict_model.py
+      hash: md5
+      md5: 0d9154d6b28a59fac9017e73fef9e08f
+      size: 1182
+    outs:
+    - path: ./predictions/predictions.csv
+      hash: md5
+      md5: 6349ec7e93b8aa421b407025b83cdabc
+      size: 6338503
