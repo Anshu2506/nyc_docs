@@ -18,19 +18,76 @@ stages:
       size: 270298975
       nfiles: 2
   build_features:
-    cmd: python ./src/features/build_features.py ./data/raw/Nyc_taxi_fare.csv
+    cmd: python ./src/features/build_features.py ./data/interim/train.csv 
+      ./data/interim/test.csv
     deps:
-    - path: ./data/raw/Nyc_taxi_fare.csv
+    - path: ./data/interim/test.csv
       hash: md5
-      md5: 5040ae10c2884d02d2e6efb5e6ae5ba7
-      size: 270429245
+      md5: 218a2e03d949efd911b7419034f1215f
+      size: 54687266
+    - path: ./data/interim/train.csv
+      hash: md5
+      md5: cecb5bb1a1ea4f47982eb012fdbf8967
+      size: 218737379
     - path: ./src/features/build_features.py
       hash: md5
-      md5: c59ef789a9d67de4fbb4485634f2a574
-      size: 3611
+      md5: 95807184d5352d47e01adfea9151c019
+      size: 7950
     outs:
     - path: ./data/external
       hash: md5
-      md5: a35139a5ff8812b492aa04715c755543.dir
-      size: 518629481
+      md5: cd12a17180838971ca45caceca8681cb.dir
+      size: 334598307
       nfiles: 4
+  preprocess:
+    cmd: python ./src/data/preprocess.py ./data/processed/train.csv 
+      ./data/processed/test.csv
+    deps:
+    - path: ./data/processed/test.csv
+      hash: md5
+      md5: 4206690f281be013435e8cd568d3c36c
+      size: 54062771
+    - path: ./data/processed/train.csv
+      hash: md5
+      md5: 8d3e1c1e4a38563d9c724af0cce605e7
+      size: 216236204
+    - path: ./src/data/preprocess.py
+      hash: md5
+      md5: 5bf5991210a55d0899c100b73b900f65
+      size: 1249
+    outs:
+    - path: ./data/interim
+      hash: md5
+      md5: 68e0e49c1f0ef2f25c8e77732f3c84b0.dir
+      size: 273424645
+      nfiles: 2
+  train_model:
+    cmd: python ./src/models/train_model.py ./data/external/x_train.csv 
+      ./data/external/x_test.csv ./data/external/y_train.csv 
+      ./data/external/y_test.csv
+    deps:
+    - path: ./data/external/x_test.csv
+      hash: md5
+      md5: 07af2935f01ed3765158ca6afaa49f0a
+      size: 60481116
+    - path: ./data/external/x_train.csv
+      hash: md5
+      md5: 783923662b5d1ab11c5d523c0b19746c
+      size: 241949229
+    - path: ./data/external/y_test.csv
+      hash: md5
+      md5: bb1356fbeceeaac3068c5354b205f589
+      size: 6434024
+    - path: ./data/external/y_train.csv
+      hash: md5
+      md5: baf95954af45772a03191ddd4aacb117
+      size: 25733938
+    - path: ./src/models/train_model.py
+      hash: md5
+      md5: 63d3f5e56d0e6910d5500ec8e1492a05
+      size: 2510
+    outs:
+    - path: ./models_matrix/best_model.pkl
+      hash: md5
+      md5: 8c4cd76da10e9b6f4bb05ba609ac231c
+      size: 4455665

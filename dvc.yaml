@@ -9,10 +9,32 @@ stages:
     
 
   build_features:
-    cmd: python ./src/features/build_features.py ./data/raw/Nyc_taxi_fare.csv
+    cmd: python ./src/features/build_features.py ./data/interim/train.csv ./data/interim/test.csv
     deps:
     - ./src/features/build_features.py
-    - ./data/raw/Nyc_taxi_fare.csv
+    - ./data/interim/train.csv
+    - ./data/interim/test.csv
 
     outs:
     - ./data/external
+
+  preprocess:
+    cmd: python ./src/data/preprocess.py ./data/processed/train.csv ./data/processed/test.csv
+    deps:
+    - ./src/data/preprocess.py
+    - ./data/processed/train.csv
+    - ./data/processed/test.csv
+    outs:
+    - ./data/interim
+
+  train_model:
+    cmd: python ./src/models/train_model.py ./data/external/x_train.csv ./data/external/x_test.csv ./data/external/y_train.csv ./data/external/y_test.csv
+    deps:
+    - ./src/models/train_model.py
+    - ./data/external/x_train.csv
+    - ./data/external/x_test.csv
+    - ./data/external/y_train.csv
+    - ./data/external/y_test.csv
+
+    outs:
+    - ./models_matrix/best_model.pkl
