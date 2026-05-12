@@ -1,8 +1,8 @@
 make_dataset:
   test_size: 0.2
-  seed: 43
+  seed: 42
 
 build_features:
   test_size: 0.2
-  seed: 43
+  seed: 42
   target: log_trip_duration
