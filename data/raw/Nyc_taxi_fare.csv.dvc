@@ -1,0 +1,5 @@
+outs:
+- md5: 5040ae10c2884d02d2e6efb5e6ae5ba7
+  size: 270429245
+  hash: md5
+  path: Nyc_taxi_fare.csv
