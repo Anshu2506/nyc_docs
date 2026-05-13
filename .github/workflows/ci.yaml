@@ -43,7 +43,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements-api.txt
         pip install dvc awscli
-
+ 
 
     # ==========================================
     # CONFIGURE AWS CREDENTIALS
@@ -61,7 +61,7 @@ jobs:
     # ==========================================
     - name: Upload Files To S3
       run: |
-        aws s3 cp data/ s3://verce-clone-480429606002-eu-north-1-an/data/ --recursive
+        aws s3 cp data/ s3://anshu-nyc-taxi-mlops/data/ --recursive
 
 
     # ==========================================
