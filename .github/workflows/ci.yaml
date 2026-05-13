@@ -42,39 +42,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements-api.txt
-
-
-    # ==========================================
-    # INSTALL DVC
-    # ==========================================
-    - name: Install DVC
-      run: |
-        pip install dvc
-
-
-    # ==========================================
-    # CONFIGURE AWS CREDENTIALS
-    # ==========================================
-    - name: Configure AWS Credentials
-    uses: aws-actions/configure-aws-credentials@v4
-    with:
-      aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
-      aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-      aws-region: ${{ secrets.REGION }}
-
-    # ==========================================
-    # UPLOAD DATA TO S3
-    # ==========================================
-    - name: Upload Files To S3
-      run: |
-        aws s3 cp data/ s3://verce-clone-480429606002-eu-north-1-an/ --recursive
-
-
-    # ==========================================
-    # SUCCESS MESSAGE
-    # ==========================================
-    - name: Success
-      run: echo "Data uploaded successfully to S3"
+        pip install dvc awscli
 
 
     # ==========================================
@@ -94,7 +62,33 @@ jobs:
 
 
     # ==========================================
+    # CONFIGURE AWS CREDENTIALS
+    # ==========================================
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.REGION }}
+
+
+    # ==========================================
+    # UPLOAD DATA TO S3
+    # ==========================================
+    - name: Upload Files To S3
+      run: |
+        aws s3 cp data/ s3://verce-clone-480429606002-eu-north-1-an/data/ --recursive
+
+
+    # ==========================================
     # SUCCESS MESSAGE
+    # ==========================================
+    - name: Success
+      run: echo "Data uploaded successfully to S3"
+
+
+    # ==========================================
+    # PIPELINE COMPLETED
     # ==========================================
     - name: Pipeline Completed
       run: echo "CI Pipeline Completed Successfully"
