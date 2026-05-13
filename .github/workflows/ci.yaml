@@ -46,22 +46,6 @@ jobs:
 
 
     # ==========================================
-    # RUN DVC PIPELINE
-    # ==========================================
-    - name: Run DVC Pipeline
-      run: |
-        dvc repro
-
-
-    # ==========================================
-    # BUILD DOCKER IMAGE
-    # ==========================================
-    - name: Build Docker Image
-      run: |
-        docker build -t nyc-taxi-api .
-
-
-    # ==========================================
     # CONFIGURE AWS CREDENTIALS
     # ==========================================
     - name: Configure AWS Credentials
@@ -85,6 +69,24 @@ jobs:
     # ==========================================
     - name: Success
       run: echo "Data uploaded successfully to S3"
+
+    # ==========================================
+    # RUN DVC PIPELINE
+    # ==========================================
+    - name: Run DVC Pipeline
+      run: |
+        dvc repro
+
+
+    # ==========================================
+    # BUILD DOCKER IMAGE
+    # ==========================================
+    - name: Build Docker Image
+      run: |
+        docker build -t nyc-taxi-api .
+
+
+    
 
 
     # ==========================================
