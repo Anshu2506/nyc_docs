@@ -24,7 +24,7 @@ jobs:
     # ==========================================
     - name: Checkout Repository
       uses: actions/checkout@v4
-      
+
 
     # ==========================================
     # SETUP PYTHON
@@ -133,7 +133,7 @@ jobs:
   # ==========================================
   Deployment:
     runs-on: self-hosted
-    needs: build-and-push-ecr
+    needs: intergation
     steps:
     - name: Deploy To EC2
       uses: appleboy/ssh-action@v1.0.3
