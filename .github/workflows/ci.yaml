@@ -12,7 +12,7 @@ on:
 
 jobs:
 
-  build-test-upload:
+  build-train-pipeline:
 
     runs-on: ubuntu-latest
 
@@ -20,7 +20,7 @@ jobs:
     steps:
 
     # ==========================================
-    # CHECKOUT CODE
+    # CHECKOUT REPOSITORY
     # ==========================================
     - name: Checkout Repository
       uses: actions/checkout@v4
@@ -42,8 +42,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements-api.txt
-        pip install dvc awscli
- 
+
+
+    # ==========================================
+    # INSTALL DVC WITH S3 SUPPORT
+    # ==========================================
+    - name: Install DVC
+      run: |
+        pip install "dvc[s3]"
+
 
     # ==========================================
     # CONFIGURE AWS CREDENTIALS
@@ -57,18 +64,12 @@ jobs:
 
 
     # ==========================================
-    # UPLOAD DATA TO S3
+    # PULL DATA FROM DVC REMOTE (S3)
     # ==========================================
-    - name: Upload Files To S3
+    - name: Pull Data From DVC Remote
       run: |
-        aws s3 cp data/ s3://anshu-nyc-taxi-mlops/data/ --recursive
+        dvc pull
 
-
-    # ==========================================
-    # SUCCESS MESSAGE
-    # ==========================================
-    - name: Success
-      run: echo "Data uploaded successfully to S3"
 
     # ==========================================
     # RUN DVC PIPELINE
@@ -79,21 +80,23 @@ jobs:
 
 
     # ==========================================
+    # PUSH UPDATED DATA / MODELS TO DVC REMOTE
+    # ==========================================
+    - name: Push Updated Artifacts
+      run: |
+        dvc push
+
+
+    # ==========================================
     # BUILD DOCKER IMAGE
     # ==========================================
     - name: Build Docker Image
       run: |
-        docker build -t nyc-taxi-api .
-
-
-    
-    # ==========================================
-    #  DOCKER IMAGE pushed to ecr
-    # ==========================================
+        docker build -t anshu000/nyc-taxi-fare .
 
 
     # ==========================================
-    # PIPELINE COMPLETED
+    # SUCCESS MESSAGE
     # ==========================================
     - name: Pipeline Completed
       run: echo "CI Pipeline Completed Successfully"
