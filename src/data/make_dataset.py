@@ -29,7 +29,7 @@ def main():
 
     #load input data
     input_path=sys.argv[1]
-    input_data=homedir.as_posix() + input_path
+    input_data=homedir.as_posix() +"/"+ input_path
 
     #params file
     params_path=homedir.as_posix()+"/params.yaml"

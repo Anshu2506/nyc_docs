@@ -33,9 +33,9 @@ def main():
     curr=pathlib.Path(__file__)
     homedir=curr.parent.parent.parent
     train_path=sys.argv[1]
-    train_file=homedir.as_posix()+train_path
+    train_file=homedir.as_posix()+"/"+train_path
     test_path=sys.argv[2]
-    test_file=homedir.as_posix()+test_path
+    test_file=homedir.as_posix()+"/"+test_path
     output_path=homedir.as_posix()+"/data/interim"
 
     train=load_train(train_file)

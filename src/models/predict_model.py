@@ -44,11 +44,11 @@ def main():
     homedir=curr.parent.parent.parent
 
     data_path=sys.argv[1]
-    data_file=homedir.as_posix()+data_path
+    data_file=homedir.as_posix()+"/"+data_path
     data=load_data(data_file)
 
     model_path=sys.argv[2]
-    model_file=homedir.as_posix()+model_path
+    model_file=homedir.as_posix()+"/"+model_path
     model=load_model(model_file)
 
     predictions=predict(model,data)

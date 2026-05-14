@@ -95,13 +95,13 @@ def main():
 
 
     x_test_path=sys.argv[1]
-    x_test_file=homedir.as_posix() + x_test_path
+    x_test_file=homedir.as_posix() +"/"+ x_test_path
     y_test_path=sys.argv[2]
-    y_test_file=homedir.as_posix() + y_test_path
+    y_test_file=homedir.as_posix() +"/"+ y_test_path
     x_test,y_test=load_data(x_test_file,y_test_file)
 
     model_path=sys.argv[3]
-    model_file=homedir.as_posix()+ model_path
+    model_file=homedir.as_posix()+"/"+ model_path
     model=load_model(model_file)
 
     metrics=evaluate_model(model,x_test,y_test)

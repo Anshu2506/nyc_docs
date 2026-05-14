@@ -336,7 +336,7 @@ def main():
     train_path = sys.argv[1]
 
     train_file = (
-        homedir.as_posix() + train_path
+        homedir.as_posix() +"/"+ train_path
     )
 
     # output path
