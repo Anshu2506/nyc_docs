@@ -109,7 +109,7 @@ jobs:
     - name: Tag Docker Image
       run: |
         docker tag nyc-taxi-fare:latest \
-        ${{ secrets.ECR_URI }}/${{secrets.ECR_REPOSITORY}}:latest
+        ${{ secrets.ECR_URI }}/${{secrets.ECR_REPOSITRY}}:latest
 
 
     # ==========================================
@@ -118,7 +118,7 @@ jobs:
     - name: Push Docker Image To ECR
       run: |
         docker push \
-        ${{ secrets.ECR_URI }}/${{secrets.ECR_REPOSITORY}}:latest
+        ${{ secrets.ECR_URI }}/${{secrets.ECR_REPOSITRY}}:latest
 
 
     # ==========================================
