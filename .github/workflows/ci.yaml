@@ -162,3 +162,5 @@ jobs:
           --name nyc-container \
           -p 8000:8000 \
           ${{ secrets.ECR_URI }}/nyc-taxi-fare:latest
+
+          
