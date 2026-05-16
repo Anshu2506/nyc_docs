@@ -160,7 +160,7 @@ jobs:
           # RUN NEW CONTAINER
           docker run -d \
           --name nyc-container \
-          -p 8000:8000 \
+          -p 8080:8080 \
           ${{ secrets.ECR_URI }}/nyc-taxi-fare:latest
 
       
